@@ -64,13 +64,13 @@ export function TechMarquee() {
 
         {/* Scrolling row 1 */}
         <div className="mb-4 flex gap-4">
-          <div className="flex shrink-0 animate-[marquee_30s_linear_infinite] gap-4">
+          <div className="flex shrink-0 animate-marquee gap-4">
             {techStack.map((tech) => (
               <TechCard key={tech.name} tech={tech} />
             ))}
           </div>
           <div
-            className="flex shrink-0 animate-[marquee_30s_linear_infinite] gap-4"
+            className="flex shrink-0 animate-marquee gap-4"
             aria-hidden
           >
             {techStack.map((tech) => (
@@ -81,13 +81,13 @@ export function TechMarquee() {
 
         {/* Scrolling row 2 - reversed */}
         <div className="flex gap-4">
-          <div className="flex shrink-0 animate-[marquee-reverse_35s_linear_infinite] gap-4">
+          <div className="flex shrink-0 animate-marquee-reverse gap-4">
             {[...techStack].reverse().map((tech) => (
               <TechCard key={`rev-${tech.name}`} tech={tech} />
             ))}
           </div>
           <div
-            className="flex shrink-0 animate-[marquee-reverse_35s_linear_infinite] gap-4"
+            className="flex shrink-0 animate-marquee-reverse gap-4"
             aria-hidden
           >
             {[...techStack].reverse().map((tech) => (
