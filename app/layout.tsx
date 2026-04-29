@@ -1,26 +1,34 @@
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
 
+import { ThemeProvider } from '@/components/theme-provider'
+import { SiteHeader } from '@/components/site/site-header'
+import { site } from '@/content/site'
 import './globals.css'
 
-const geistSans = Geist({
-  subsets: ['latin'],
-  variable: '--font-geist-sans',
-})
-
-const geistMono = Geist_Mono({
-  subsets: ['latin'],
-  variable: '--font-geist-mono',
-})
-
 export const metadata: Metadata = {
-  title: 'Lattelix | Frontend Developer Portfolio',
-  description:
-    'Building High-Performance Interfaces with Next.js. 4+ years of experience in SPA optimization and clean UX.',
+  metadataBase: new URL('https://lattelix.ru'),
+  title: {
+    default: site.title,
+    template: `%s — ${site.name}`,
+  },
+  description: site.description,
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: site.title,
+    description: site.description,
+    siteName: site.name,
+    url: 'https://lattelix.ru',
+    type: 'website',
+  },
 }
 
 export const viewport: Viewport = {
-  themeColor: '#09090b',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#f4f7ed' },
+    { media: '(prefers-color-scheme: dark)', color: '#070b0c' },
+  ],
   userScalable: true,
 }
 
@@ -30,8 +38,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="font-sans antialiased">{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <SiteHeader />
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   )
 }
