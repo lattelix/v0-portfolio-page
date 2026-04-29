@@ -64,7 +64,7 @@ export default async function Page() {
           </div>
           <div>
             <Mail aria-hidden="true" size={18} />
-            <a href={`mailto:${site.careerEmail}`}>{site.careerEmail}</a>
+            <a href={`mailto:${site.email}`}>{site.email}</a>
           </div>
           <div>
             <Globe2 aria-hidden="true" size={18} />

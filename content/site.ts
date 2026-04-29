@@ -17,7 +17,7 @@ export const site = {
   title: 'Lattelix — living web systems, interfaces and experiments',
   description:
     'Personal hub for full-stack interfaces, data-heavy products, games, engineering notes and selected work.',
-  email: 'lattelix.dev@gmail.com',
+  email: 'hello@lattelix.ru',
   careerEmail: 'career@lattelix.ru',
   githubUsername: 'lattelix',
   role: 'Frontend, full-stack and data engineer',
@@ -40,7 +40,7 @@ export const socials = [
 
 export const contactLinks = [
   { label: 'Career', value: site.careerEmail, href: `mailto:${site.careerEmail}` },
-  { label: 'Direct', value: site.email, href: `mailto:${site.email}` },
+  { label: 'Hello', value: site.email, href: `mailto:${site.email}` },
   { label: 'Domain', value: site.domain, href: `https://${site.domain}` },
 ]
 
