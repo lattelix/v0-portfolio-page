@@ -479,6 +479,24 @@
   padding: 0.75rem 0.9rem;
 }
 
+.hero-dock span,
+.hero-dock a {
+  color: hsl(var(--foreground) / 0.82);
+  font-size: 0.9rem;
+}
+
+.hero-dock a {
+  text-decoration: underline;
+  text-decoration-color: hsl(var(--line) / 0.22);
+  text-underline-offset: 0.22rem;
+}
+
+.hero-dock strong {
+  color: hsl(var(--foreground));
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
 .content-band,
 .route-section,
 .site-footer {
@@ -724,6 +742,41 @@
   flex-wrap: wrap;
   gap: 0.55rem;
   margin-top: 1rem;
+}
+
+.contact-list,
+.stack-groups {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.contact-list a,
+.stack-groups div {
+  background: hsl(var(--background) / 0.46);
+  border: 1px solid hsl(var(--line) / 0.11);
+  border-radius: var(--radius);
+  padding: 0.8rem;
+}
+
+.contact-list span,
+.stack-groups strong {
+  color: hsl(var(--primary));
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.contact-list strong {
+  color: hsl(var(--foreground));
+  display: block;
+  font-size: 0.98rem;
+  margin-top: 0.25rem;
+  overflow-wrap: anywhere;
+}
+
+.stack-groups p {
+  margin: 0.35rem 0 0;
 }
 
 @keyframes scene-breathe {

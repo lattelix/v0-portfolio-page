@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 import { RoutePage } from '@/components/site/route-page'
-import { experience, focusAreas, site } from '@/content/site'
+import { contactLinks, experience, focusAreas, site, stackGroups } from '@/content/site'
 
 export const metadata: Metadata = {
   title: 'CV',
@@ -26,6 +26,30 @@ export default function CvPage() {
           <div className="skill-list">
             {focusAreas.map((area) => (
               <span key={area}>{area}</span>
+            ))}
+          </div>
+        </article>
+
+        <article>
+          <h2>Contact</h2>
+          <div className="contact-list">
+            {contactLinks.map((contact) => (
+              <a href={contact.href} key={contact.label}>
+                <span>{contact.label}</span>
+                <strong>{contact.value}</strong>
+              </a>
+            ))}
+          </div>
+        </article>
+
+        <article>
+          <h2>Stack</h2>
+          <div className="stack-groups">
+            {stackGroups.map((group) => (
+              <div key={group.title}>
+                <strong>{group.title}</strong>
+                <p>{group.items.join(' / ')}</p>
+              </div>
             ))}
           </div>
         </article>

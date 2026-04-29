@@ -17,7 +17,9 @@ export const site = {
   title: 'Lattelix — living web systems, interfaces and experiments',
   description:
     'Personal hub for full-stack interfaces, data-heavy products, games, engineering notes and selected work.',
-  email: 'hello@lattelix.ru',
+  email: 'lattelix.dev@gmail.com',
+  careerEmail: 'career@lattelix.ru',
+  githubUsername: 'lattelix',
   role: 'Frontend, full-stack and data engineer',
   summary:
     'I design and build web systems that feel alive: fast interfaces, precise product surfaces, data tools, automations and playable experiments.',
@@ -36,12 +38,33 @@ export const socials = [
   { label: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin },
 ]
 
+export const contactLinks = [
+  { label: 'Career', value: site.careerEmail, href: `mailto:${site.careerEmail}` },
+  { label: 'Direct', value: site.email, href: `mailto:${site.email}` },
+  { label: 'Domain', value: site.domain, href: `https://${site.domain}` },
+]
+
 export const focusAreas = [
   'Living product interfaces',
   'Next.js and React architecture',
   'Data-heavy dashboards',
   'Automation and private tools',
   'Games and interaction design',
+]
+
+export const stackGroups = [
+  {
+    title: 'Frontend',
+    items: ['React', 'Next.js', 'TypeScript', 'Tailwind', 'Motion systems'],
+  },
+  {
+    title: 'Backend and data',
+    items: ['Node.js', 'API contracts', 'PostgreSQL', 'Data visualization', 'Automation'],
+  },
+  {
+    title: 'Infrastructure',
+    items: ['GitHub', 'Vercel', 'Cloudflare', 'Docker', 'Private tooling'],
+  },
 ]
 
 export const experience = [

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowUpRight, Cpu, ExternalLink, Gauge, Radio, Waves } from 'lucide-react'
+import { ArrowUpRight, Cpu, ExternalLink, Github, Globe2, Mail } from 'lucide-react'
 
 import { LivingScene } from '@/components/site/living-scene'
 import {
@@ -13,8 +13,11 @@ import {
   socials,
   systemLinks,
 } from '@/content/site'
+import { getGitHubSignal } from '@/lib/github'
 
-export default function Page() {
+export default async function Page() {
+  const githubSignal = await getGitHubSignal()
+
   return (
     <main>
       <section className="home-hero">
@@ -51,18 +54,24 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="hero-dock" aria-label="System status">
+        <div className="hero-dock" aria-label="Live signals">
           <div>
-            <Radio aria-hidden="true" size={18} />
-            <span>Signal online</span>
+            <Github aria-hidden="true" size={18} />
+            <span>
+              <strong>{githubSignal?.publicRepos ?? 'GitHub'}</strong>{' '}
+              {githubSignal ? 'public repos' : 'profile'}
+            </span>
           </div>
           <div>
-            <Waves aria-hidden="true" size={18} />
-            <span>Nature x Tech</span>
+            <Mail aria-hidden="true" size={18} />
+            <a href={`mailto:${site.careerEmail}`}>{site.careerEmail}</a>
           </div>
           <div>
-            <Gauge aria-hidden="true" size={18} />
-            <span>Built for Vercel</span>
+            <Globe2 aria-hidden="true" size={18} />
+            <span>
+              <strong>{githubSignal ? githubSignal.latestPush : site.domain}</strong>{' '}
+              {githubSignal ? 'latest GitHub push' : 'production domain'}
+            </span>
           </div>
         </div>
       </section>
@@ -170,6 +179,10 @@ export default function Page() {
           <p>Open for product interfaces, frontend systems, data-heavy tools and experimental web work.</p>
         </div>
         <div className="footer-links">
+          <a href={`mailto:${site.email}`}>
+            <Mail aria-hidden="true" size={18} />
+            Email
+          </a>
           {socials.map((social) => {
             const Icon = social.icon
 
