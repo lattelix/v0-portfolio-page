@@ -7,15 +7,32 @@ type GitHubUser = {
 
 type GitHubRepo = {
   archived: boolean
+  description: string | null
   fork: boolean
+  html_url: string
+  language: string | null
+  name: string
   pushed_at: string | null
   stargazers_count: number
 }
 
+export type GitHubRepoSignal = {
+  description: string
+  language: string
+  name: string
+  pushedAt: string
+  stars: number
+  url: string
+}
+
 export type GitHubSignal = {
+  activeRepos: number
+  followers: number
+  latestRepo: GitHubRepoSignal | null
   latestPush: string
   publicRepos: number
   stars: number
+  topRepo: GitHubRepoSignal | null
 }
 
 const githubHeaders = {
@@ -32,6 +49,21 @@ function formatDate(value: string | null) {
     day: '2-digit',
     month: 'short',
   }).format(new Date(value))
+}
+
+function toRepoSignal(repo: GitHubRepo | undefined): GitHubRepoSignal | null {
+  if (!repo) {
+    return null
+  }
+
+  return {
+    description: repo.description ?? 'Public repository',
+    language: repo.language ?? 'Code',
+    name: repo.name,
+    pushedAt: formatDate(repo.pushed_at),
+    stars: repo.stargazers_count,
+    url: repo.html_url,
+  }
 }
 
 export async function getGitHubSignal(): Promise<GitHubSignal | null> {
@@ -54,12 +86,17 @@ export async function getGitHubSignal(): Promise<GitHubSignal | null> {
     const user = (await userResponse.json()) as GitHubUser
     const repos = (await reposResponse.json()) as GitHubRepo[]
     const ownRepos = repos.filter((repo) => !repo.fork && !repo.archived)
-    const latestPush = ownRepos.find((repo) => repo.pushed_at)?.pushed_at ?? null
+    const latestRepo = ownRepos.find((repo) => repo.pushed_at)
+    const topRepo = [...ownRepos].sort((a, b) => b.stargazers_count - a.stargazers_count)[0]
 
     return {
-      latestPush: formatDate(latestPush),
+      activeRepos: ownRepos.length,
+      followers: user.followers,
+      latestRepo: toRepoSignal(latestRepo),
+      latestPush: formatDate(latestRepo?.pushed_at ?? null),
       publicRepos: user.public_repos,
       stars: ownRepos.reduce((total, repo) => total + repo.stargazers_count, 0),
+      topRepo: toRepoSignal(topRepo),
     }
   } catch {
     return null

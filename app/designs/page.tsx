@@ -1,17 +1,15 @@
-import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { RoutePage } from '@/components/site/route-page'
 import { designVariants } from '@/content/site'
+import { createPageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  robots: {
-    follow: false,
-    index: false,
-  },
-  title: 'Design Lab',
+export const metadata = createPageMetadata({
   description: 'Alternative design directions for Lattelix.',
-}
+  noIndex: true,
+  path: '/designs',
+  title: 'Design Lab',
+})
 
 export default function DesignsPage() {
   return (

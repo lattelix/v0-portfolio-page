@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { RoutePage } from '@/components/site/route-page'
 import { games } from '@/content/site'
 import { ForestSignalGame } from '@/components/games/forest-signal/forest-signal-game'
+import { createPageMetadata } from '@/lib/seo'
 
 type GamePageProps = {
   params: Promise<{ slug: string }>
@@ -21,10 +22,11 @@ export async function generateMetadata({ params }: GamePageProps): Promise<Metad
     return {}
   }
 
-  return {
-    title: game.title,
+  return createPageMetadata({
     description: game.description,
-  }
+    path: `/games/${game.slug}`,
+    title: game.title,
+  })
 }
 
 export default async function GameDetailPage({ params }: GamePageProps) {

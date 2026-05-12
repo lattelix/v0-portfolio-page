@@ -4,7 +4,6 @@ import {
   Gamepad2,
   Github,
   Layers3,
-  Linkedin,
   Music2,
   NotebookText,
   Send,
@@ -37,7 +36,6 @@ export const navItems = [
 export const socials = [
   { label: 'Telegram', href: 'https://t.me/lattelix', icon: Send },
   { label: 'GitHub', href: 'https://github.com/lattelix', icon: Github },
-  { label: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin },
 ]
 
 export const contactLinks = [
@@ -52,6 +50,46 @@ export const focusAreas = [
   'Data-heavy dashboards',
   'Automation and private tools',
   'Games and interaction design',
+]
+
+export const availability = {
+  label: 'Availability',
+  status: 'Selective project work',
+  detail: 'Open to strong product/interface, frontend platform and data-heavy web work.',
+}
+
+export const currentFocus = [
+  'Turning the personal hub into a durable public operating surface',
+  'Publishing richer project case studies instead of empty portfolio cards',
+  'Building small playable web experiments with production-level polish',
+  'Keeping private tools behind Cloudflare Access or Tunnel instead of public subdomains',
+]
+
+export const proofPoints = [
+  {
+    title: 'Production frontend',
+    signal: 'Commercial SPA work',
+    detail:
+      'React and TypeScript work focused on loading behavior, product UX states and maintainable interface delivery.',
+  },
+  {
+    title: 'Data-heavy products',
+    signal: 'Full-stack/data surfaces',
+    detail:
+      'Experience building application features around datasets, backend contracts and readable operational screens.',
+  },
+  {
+    title: 'Systems mindset',
+    signal: 'Infra-aware product work',
+    detail:
+      'The site is structured as a hub for public routes and private infrastructure, not just a static resume page.',
+  },
+  {
+    title: 'Design engineering',
+    signal: 'Nature x Tech direction',
+    detail:
+      'Strong visual system, motion, theme-aware atmosphere and interaction details are treated as product quality.',
+  },
 ]
 
 export const stackGroups = [

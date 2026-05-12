@@ -1,13 +1,14 @@
-import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { RoutePage } from '@/components/site/route-page'
 import { projects, site } from '@/content/site'
+import { createPageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Works',
+export const metadata = createPageMetadata({
   description: `Selected work and engineering projects by ${site.name}.`,
-}
+  path: '/works',
+  title: 'Works',
+})
 
 export default function WorksPage() {
   return (

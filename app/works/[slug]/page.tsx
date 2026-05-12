@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 
 import { RoutePage } from '@/components/site/route-page'
 import { projects, site } from '@/content/site'
+import { createPageMetadata } from '@/lib/seo'
 
 type WorkPageProps = {
   params: Promise<{ slug: string }>
@@ -20,10 +21,11 @@ export async function generateMetadata({ params }: WorkPageProps): Promise<Metad
     return {}
   }
 
-  return {
-    title: project.name,
+  return createPageMetadata({
     description: project.description,
-  }
+    path: `/works/${project.slug}`,
+    title: project.name,
+  })
 }
 
 export default async function WorkDetailPage({ params }: WorkPageProps) {

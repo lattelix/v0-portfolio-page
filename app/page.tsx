@@ -1,19 +1,30 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowUpRight, Cpu, ExternalLink, Github, Globe2, Mail, Music2, Palette } from 'lucide-react'
+import { ArrowUpRight, ExternalLink, Github, Globe2, Mail } from 'lucide-react'
 
 import { LivingScene } from '@/components/site/living-scene'
+import { LiveSignalPanel } from '@/components/site/live-signal-panel'
 import {
   experience,
   focusAreas,
   games,
   navItems,
   posts,
+  proofPoints,
   projects,
   site,
   socials,
-  systemLinks,
 } from '@/content/site'
 import { getGitHubSignal } from '@/lib/github'
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+  title: {
+    absolute: site.title,
+  },
+}
 
 export default async function Page() {
   const githubSignal = await getGitHubSignal()
@@ -58,8 +69,8 @@ export default async function Page() {
           <div>
             <Github aria-hidden="true" size={18} />
             <span>
-              <strong>{githubSignal?.publicRepos ?? 'GitHub'}</strong>{' '}
-              {githubSignal ? 'public repos' : 'profile'}
+              <strong>{githubSignal?.activeRepos ?? 'GitHub'}</strong>{' '}
+              {githubSignal ? 'active own repos' : 'profile'}
             </span>
           </div>
           <div>
@@ -69,8 +80,8 @@ export default async function Page() {
           <div>
             <Globe2 aria-hidden="true" size={18} />
             <span>
-              <strong>{githubSignal ? githubSignal.latestPush : site.domain}</strong>{' '}
-              {githubSignal ? 'latest GitHub push' : 'production domain'}
+              <strong>{githubSignal?.latestRepo?.name ?? site.domain}</strong>{' '}
+              {githubSignal ? `latest push / ${githubSignal.latestPush}` : 'production domain'}
             </span>
           </div>
         </div>
@@ -84,6 +95,22 @@ export default async function Page() {
         <div className="focus-cloud">
           {focusAreas.map((area) => (
             <span key={area}>{area}</span>
+          ))}
+        </div>
+      </section>
+
+      <section className="content-band proof-band">
+        <div className="section-heading">
+          <p>Proof layer</p>
+          <h2>Credibility should be concrete: work signals, not empty self-description.</h2>
+        </div>
+        <div className="proof-grid">
+          {proofPoints.map((point) => (
+            <article key={point.title}>
+              <span>{point.signal}</span>
+              <h3>{point.title}</h3>
+              <p>{point.detail}</p>
+            </article>
           ))}
         </div>
       </section>
@@ -127,33 +154,7 @@ export default async function Page() {
           </div>
         </div>
 
-        <aside className="system-panel" aria-label="Infrastructure plan">
-          <Cpu aria-hidden="true" size={28} />
-          <h2>Public systems, private tools and experiments that can grow into products.</h2>
-          <div className="system-list">
-            {systemLinks.map((item) => {
-              const Icon = item.icon
-
-              return (
-                <div key={item.label}>
-                  <Icon aria-hidden="true" size={17} />
-                  <span>{item.label}</span>
-                  <strong>{item.value}</strong>
-                </div>
-              )
-            })}
-            <Link href="/music">
-              <Music2 aria-hidden="true" size={17} />
-              <span>Music</span>
-              <strong>Public room</strong>
-            </Link>
-            <Link href="/designs">
-              <Palette aria-hidden="true" size={17} />
-              <span>Design lab</span>
-              <strong>Noindex</strong>
-            </Link>
-          </div>
-        </aside>
+        <LiveSignalPanel githubSignal={githubSignal} />
       </section>
 
       <section className="content-band media-band">

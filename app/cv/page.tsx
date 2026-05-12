@@ -1,12 +1,12 @@
-import type { Metadata } from 'next'
-
 import { RoutePage } from '@/components/site/route-page'
-import { contactLinks, experience, focusAreas, site, stackGroups } from '@/content/site'
+import { availability, contactLinks, experience, focusAreas, proofPoints, site, stackGroups } from '@/content/site'
+import { createPageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'CV',
+export const metadata = createPageMetadata({
   description: `CV and engineering profile for ${site.name}.`,
-}
+  path: '/cv',
+  title: 'CV',
+})
 
 export default function CvPage() {
   return (
@@ -43,6 +43,16 @@ export default function CvPage() {
         </article>
 
         <article>
+          <h2>Availability</h2>
+          <div className="stack-groups">
+            <div>
+              <strong>{availability.status}</strong>
+              <p>{availability.detail}</p>
+            </div>
+          </div>
+        </article>
+
+        <article>
           <h2>Stack</h2>
           <div className="stack-groups">
             {stackGroups.map((group) => (
@@ -63,6 +73,19 @@ export default function CvPage() {
                 <h3>{item.company}</h3>
                 <strong>{item.role}</strong>
                 <p>{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <article className="wide-article">
+          <h2>Proof points</h2>
+          <div className="proof-grid compact-proof-grid">
+            {proofPoints.map((point) => (
+              <div key={point.title}>
+                <span>{point.signal}</span>
+                <h3>{point.title}</h3>
+                <p>{point.detail}</p>
               </div>
             ))}
           </div>

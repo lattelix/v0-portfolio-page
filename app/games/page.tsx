@@ -1,13 +1,14 @@
-import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { RoutePage } from '@/components/site/route-page'
 import { games, site } from '@/content/site'
+import { createPageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Games',
+export const metadata = createPageMetadata({
   description: `Game prototypes and playable experiments by ${site.name}.`,
-}
+  path: '/games',
+  title: 'Games',
+})
 
 export default function GamesPage() {
   return (

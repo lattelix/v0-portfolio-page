@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 
 import { RoutePage } from '@/components/site/route-page'
 import { posts } from '@/content/site'
+import { createPageMetadata } from '@/lib/seo'
 
 type PostPageProps = {
   params: Promise<{ slug: string }>
@@ -20,10 +21,11 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     return {}
   }
 
-  return {
-    title: post.title,
+  return createPageMetadata({
     description: post.description,
-  }
+    path: `/posts/${post.slug}`,
+    title: post.title,
+  })
 }
 
 export default async function PostDetailPage({ params }: PostPageProps) {

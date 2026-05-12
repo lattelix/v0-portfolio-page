@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { designVariants, focusAreas, projects, site } from '@/content/site'
+import { createPageMetadata } from '@/lib/seo'
 
 type DesignPageProps = {
   params: Promise<{ slug: string }>
@@ -19,14 +20,12 @@ export async function generateMetadata({ params }: DesignPageProps): Promise<Met
     return {}
   }
 
-  return {
-    robots: {
-      follow: false,
-      index: false,
-    },
-    title: variant.title,
+  return createPageMetadata({
     description: variant.description,
-  }
+    noIndex: true,
+    path: `/designs/${variant.slug}`,
+    title: variant.title,
+  })
 }
 
 export default async function DesignVariantPage({ params }: DesignPageProps) {

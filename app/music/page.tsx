@@ -1,12 +1,12 @@
-import type { Metadata } from 'next'
-
 import { RoutePage } from '@/components/site/route-page'
 import { musicPlan, site } from '@/content/site'
+import { createPageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Music',
+export const metadata = createPageMetadata({
   description: `${site.name} music room, listening notes and Navidrome architecture plan.`,
-}
+  path: '/music',
+  title: 'Music',
+})
 
 export default function MusicPage() {
   return (
