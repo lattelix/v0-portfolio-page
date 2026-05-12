@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowUpRight, Cpu, ExternalLink, Github, Globe2, Mail } from 'lucide-react'
+import { ArrowUpRight, Cpu, ExternalLink, Github, Globe2, Mail, Music2, Palette } from 'lucide-react'
 
 import { LivingScene } from '@/components/site/living-scene'
 import {
@@ -129,7 +129,7 @@ export default async function Page() {
 
         <aside className="system-panel" aria-label="Infrastructure plan">
           <Cpu aria-hidden="true" size={28} />
-          <h2>GitHub to Vercel. DNS on Cloudflare. Private tools later.</h2>
+          <h2>Public systems, private tools and experiments that can grow into products.</h2>
           <div className="system-list">
             {systemLinks.map((item) => {
               const Icon = item.icon
@@ -142,6 +142,16 @@ export default async function Page() {
                 </div>
               )
             })}
+            <Link href="/music">
+              <Music2 aria-hidden="true" size={17} />
+              <span>Music</span>
+              <strong>Public room</strong>
+            </Link>
+            <Link href="/designs">
+              <Palette aria-hidden="true" size={17} />
+              <span>Design lab</span>
+              <strong>Noindex</strong>
+            </Link>
           </div>
         </aside>
       </section>
@@ -154,7 +164,7 @@ export default async function Page() {
         <div className="media-columns">
           <div>
             {posts.map((post) => (
-              <Link className="list-link" href="/posts" key={post.slug}>
+              <Link className="list-link" href={`/posts/${post.slug}`} key={post.slug}>
                 <span>{post.readTime}</span>
                 <strong>{post.title}</strong>
                 <p>{post.description}</p>
@@ -163,7 +173,7 @@ export default async function Page() {
           </div>
           <div>
             {games.map((game) => (
-              <Link className="list-link" href="/games" key={game.slug}>
+              <Link className="list-link" href={game.href} key={game.slug}>
                 <span>{game.status}</span>
                 <strong>{game.title}</strong>
                 <p>{game.description}</p>

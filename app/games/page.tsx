@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 
 import { RoutePage } from '@/components/site/route-page'
 import { games, site } from '@/content/site'
@@ -17,7 +18,7 @@ export default function GamesPage() {
     >
       <section className="route-section route-grid">
         {games.map((game) => (
-          <article className="route-card" key={game.slug}>
+          <Link className="route-card" href={game.href} key={game.slug}>
             <span>{game.status}</span>
             <h2>{game.title}</h2>
             <p>{game.description}</p>
@@ -26,7 +27,7 @@ export default function GamesPage() {
                 <small key={item}>{item}</small>
               ))}
             </div>
-          </article>
+          </Link>
         ))}
       </section>
     </RoutePage>

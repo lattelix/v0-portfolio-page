@@ -22,6 +22,7 @@ export default function WorksPage() {
             <span>{project.status}</span>
             <h2>{project.name}</h2>
             <p>{project.description}</p>
+            <strong>{project.result}</strong>
             <div>
               {project.stack.map((item) => (
                 <small key={item}>{item}</small>

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 
 import { RoutePage } from '@/components/site/route-page'
 import { posts, site } from '@/content/site'
@@ -17,11 +18,11 @@ export default function PostsPage() {
     >
       <section className="route-section stacked-list">
         {posts.map((post) => (
-          <article className="list-link" key={post.slug}>
+          <Link className="list-link" href={`/posts/${post.slug}`} key={post.slug}>
             <span>{post.date} / {post.readTime}</span>
             <strong>{post.title}</strong>
             <p>{post.description}</p>
-          </article>
+          </Link>
         ))}
       </section>
     </RoutePage>
