@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 
 import { games, posts, projects, site } from '@/content/site'
 
-const staticRoutes = ['', '/cv', '/works', '/posts', '/tools', '/tools/qr-code', '/games', '/music']
+const staticRoutes = ['', '/cv', '/works', '/posts', '/tools', '/tools/images', '/tools/files', '/tools/qr-code', '/games', '/music']
 const dynamicRoutes = [
   ...projects.map((project) => `/works/${project.slug}`),
   ...posts.map((post) => `/posts/${post.slug}`),
