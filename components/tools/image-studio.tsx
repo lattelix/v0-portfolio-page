@@ -73,7 +73,8 @@ export function ImageStudio() {
         <button className="studio-export" onClick={exportImage}><Download size={17}/>Export image</button>
         <p className="tool-note">{tab==='upscale'?'High-quality browser resampling. This increases resolution but does not invent AI detail.':'Everything stays in this browser tab.'}</p>
       </aside>
-      <div className="tool-preview studio-preview"><div className="tool-preview__heading"><div><p>Preview</p><strong>{out.w} × {out.h}</strong></div></div><div className="studio-image-stage"><img src={url} alt="Selected preview" style={tab==='crop'?{clipPath:`inset(${crop.y}% ${100-crop.x-crop.w}% ${100-crop.y-crop.h}% ${crop.x}%)`}:undefined}/></div></div>
+      <div className="tool-preview studio-preview"><div className="tool-preview__heading"><div><p>Preview</p><strong>{out.w} × {out.h}</strong></div></div><div className="studio-image-stage">{/* eslint-disable-next-line @next/next/no-img-element */}
+<img src={url} alt="Selected preview" style={tab==='crop'?{clipPath:`inset(${crop.y}% ${100-crop.x-crop.w}% ${100-crop.y-crop.h}% ${crop.x}%)`}:undefined}/></div></div>
     </div>}
     <canvas ref={canvas} hidden />
   </div>
