@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowUpRight, ExternalLink, Github, Globe2, Mail } from 'lucide-react'
+import { ArrowUpRight, ExternalLink, Github, Globe2, Mail, Triangle } from 'lucide-react'
 
 import { LivingScene } from '@/components/site/living-scene'
 import { LiveSignalPanel } from '@/components/site/live-signal-panel'
@@ -204,6 +204,17 @@ export default async function Page() {
               </a>
             )
           })}
+        </div>
+        <div className="footer-build-links" aria-label="Site source and deployment">
+          <span>Site</span>
+          <a href="https://github.com/lattelix/v0-portfolio-page" rel="noreferrer" target="_blank">
+            <Github aria-hidden="true" size={14} />
+            Source
+          </a>
+          <a href="https://vercel.com/alexs-projects-76662c2b/v0-portfolio-page" rel="noreferrer" target="_blank">
+            <Triangle aria-hidden="true" size={13} />
+            Vercel
+          </a>
         </div>
       </footer>
     </main>
