@@ -9,6 +9,7 @@ import {
   Send,
   Sparkles,
   TerminalSquare,
+  Wrench,
 } from 'lucide-react'
 
 export const site = {
@@ -29,6 +30,7 @@ export const navItems = [
   { label: 'CV', href: '/cv', icon: FileText },
   { label: 'Works', href: '/works', icon: Layers3 },
   { label: 'Posts', href: '/posts', icon: NotebookText },
+  { label: 'Tools', href: '/tools', icon: Wrench },
   { label: 'Games', href: '/games', icon: Gamepad2 },
   { label: 'Music', href: '/music', icon: Music2 },
 ]
