@@ -12,6 +12,7 @@ type ExportSize = 512 | 1024 | 2048
 type QrInstance = {
   append: (element: HTMLElement) => void
   update: (options: Record<string, unknown>) => void
+  getRawData: (extension: 'png' | 'svg') => Promise<Blob | null>
   download: (options: { name: string; extension: 'png' | 'svg' }) => Promise<void> | void
 }
 
@@ -128,10 +129,18 @@ export function QrGenerator() {
     if (!qr) return
 
     try {
-      await qr.download({
-        name: 'qr-code',
-        extension,
-      })
+      const blob = await qr.getRawData(extension)
+      if (!blob) throw new Error('QR export returned no data')
+
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = `qr-code.${extension}`
+      link.style.display = 'none'
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+      window.setTimeout(() => URL.revokeObjectURL(url), 1000)
     } catch (error) {
       console.error('QR export failed', error)
       setEngineError(true)
