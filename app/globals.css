@@ -1686,3 +1686,9 @@
 .studio-file-list small { color:hsl(var(--muted)); }
 .studio-file-list button { border:0; background:transparent; color:hsl(var(--muted)); cursor:pointer; }
 @media (min-width:900px){ .studio-workspace{grid-template-columns:minmax(19rem,.72fr) minmax(0,1.28fr)} .studio-preview{position:sticky;top:6.5rem} }
+
+.footer-build-links { grid-column:1/-1; display:flex; align-items:center; justify-content:flex-end; gap:.75rem; padding-top:.35rem; color:hsl(var(--muted)); font-family:var(--font-mono); font-size:.72rem; opacity:.68; }
+.footer-build-links span { opacity:.7; }
+.footer-build-links a { display:inline-flex; align-items:center; gap:.3rem; transition:color 160ms ease,opacity 160ms ease; }
+.footer-build-links a:hover { color:hsl(var(--foreground)); opacity:1; }
+@media(max-width:520px){.footer-build-links{justify-content:flex-start;}}
