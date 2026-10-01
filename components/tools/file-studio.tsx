@@ -3,7 +3,19 @@ import Script from 'next/script'
 import { Download, FilePlus2, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 type Tab='merge'|'split'|'images'
-declare global { interface Window { PDFLib?: any } }
+type PdfPage = { drawImage: (image: unknown, options: { x: number; y: number; width: number; height: number }) => void }
+type PdfImage = { width: number; height: number }
+type PdfDocumentInstance = {
+  getPageIndices: () => number[]
+  getPageCount: () => number
+  copyPages: (source: PdfDocumentInstance, indices: number[]) => Promise<PdfPage[]>
+  addPage: (sizeOrPage?: [number, number] | PdfPage) => PdfPage
+  embedPng: (bytes: ArrayBuffer) => Promise<PdfImage>
+  embedJpg: (bytes: ArrayBuffer) => Promise<PdfImage>
+  save: () => Promise<Uint8Array>
+}
+type PdfLibApi = { PDFDocument: { create: () => Promise<PdfDocumentInstance>; load: (bytes: ArrayBuffer) => Promise<PdfDocumentInstance> } }
+declare global { interface Window { PDFLib?: PdfLibApi } }
 export function FileStudio(){
  const [tab,setTab]=useState<Tab>('merge'),[files,setFiles]=useState<File[]>([]),[pages,setPages]=useState('1'),[ready,setReady]=useState(false),[busy,setBusy]=useState(false)
  const accept=tab==='images'?'image/*':'application/pdf'
@@ -11,10 +23,12 @@ export function FileStudio(){
  async function run(){
   if(!ready||!files.length)return;setBusy(true)
   try{
-   const {PDFDocument}=window.PDFLib
-   let out
-   if(tab==='merge'){out=await PDFDocument.create();for(const f of files){const src=await PDFDocument.load(await f.arrayBuffer());const copied=await out.copyPages(src,src.getPageIndices());copied.forEach((p:any)=>out.addPage(p))}}
-   if(tab==='split'){const src=await PDFDocument.load(await files[0].arrayBuffer());out=await PDFDocument.create();const wanted=pages.split(',').flatMap(part=>{const [a,b]=part.trim().split('-').map(Number);if(!a)return[];return b?Array.from({length:b-a+1},(_,i)=>a+i):[a]}).filter((n,i,a)=>n>0&&n<=src.getPageCount()&&a.indexOf(n)===i);const copied=await out.copyPages(src,wanted.map(n=>n-1));copied.forEach((p:any)=>out.addPage(p))}
+   const pdfLib=window.PDFLib
+   if(!pdfLib) return
+   const {PDFDocument}=pdfLib
+   let out: PdfDocumentInstance
+   if(tab==='merge'){out=await PDFDocument.create();for(const f of files){const src=await PDFDocument.load(await f.arrayBuffer());const copied=await out.copyPages(src,src.getPageIndices());copied.forEach(p=>out.addPage(p))}}
+   if(tab==='split'){const src=await PDFDocument.load(await files[0].arrayBuffer());out=await PDFDocument.create();const wanted=pages.split(',').flatMap(part=>{const [a,b]=part.trim().split('-').map(Number);if(!a)return[];return b?Array.from({length:b-a+1},(_,i)=>a+i):[a]}).filter((n,i,a)=>n>0&&n<=src.getPageCount()&&a.indexOf(n)===i);const copied=await out.copyPages(src,wanted.map(n=>n-1));copied.forEach(p=>out.addPage(p))}
    if(tab==='images'){out=await PDFDocument.create();for(const f of files){const bytes=await f.arrayBuffer();const img=f.type==='image/png'?await out.embedPng(bytes):await out.embedJpg(bytes);const page=out.addPage([img.width,img.height]);page.drawImage(img,{x:0,y:0,width:img.width,height:img.height})}}
    const bytes=await out.save(),blob=new Blob([bytes],{type:'application/pdf'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=tab==='merge'?'merged.pdf':tab==='split'?'pages.pdf':'images.pdf';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)
   }finally{setBusy(false)}
