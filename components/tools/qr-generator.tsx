@@ -123,11 +123,19 @@ export function QrGenerator() {
     setLogoSize(0.3)
   }
 
-  function download(extension: 'png' | 'svg') {
-    qrRef.current?.download({
-      name: 'qr-code',
-      extension,
-    })
+  async function download(extension: 'png' | 'svg') {
+    const qr = qrRef.current
+    if (!qr) return
+
+    try {
+      await qr.download({
+        name: 'qr-code',
+        extension,
+      })
+    } catch (error) {
+      console.error('QR export failed', error)
+      setEngineError(true)
+    }
   }
 
   return (
@@ -135,7 +143,7 @@ export function QrGenerator() {
       <Script
         id="qr-code-styling"
         onError={() => setEngineError(true)}
-        onReady={() => setEngineReady(true)}
+        onLoad={() => setEngineReady(true)}
         src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.9.2/lib/qr-code-styling.js"
         strategy="afterInteractive"
       />
