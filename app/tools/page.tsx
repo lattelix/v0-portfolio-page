@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { FileStack, Images, QrCode } from 'lucide-react'
+import { Braces, FileStack, Images, QrCode } from 'lucide-react'
 import { RoutePage } from '@/components/site/route-page'
 import { site } from '@/content/site'
 import { createPageMetadata } from '@/lib/seo'
 export const metadata: Metadata=createPageMetadata({description:`Small, free browser tools by ${site.name}.`,path:'/tools',title:'Tools'})
 const groups=[
+ {title:'Dev Studio',status:'Ready',description:'Format and validate JSON, encode Base64 and URLs, generate UUIDs and convert timestamps in one workspace.',href:'/tools/dev',stack:['JSON','Base64','URL','UUID','Timestamp'],icon:Braces},
  {title:'Image Studio',status:'Ready',description:'One workspace for resize, crop, upscale, compression and format conversion. Upload once and move between operations.',href:'/tools/images',stack:['Resize','Crop','Upscale','Compress','Convert'],icon:Images},
  {title:'File Studio',status:'Ready',description:'Merge PDFs, extract selected pages, or turn a set of images into a PDF without uploading files.',href:'/tools/files',stack:['Merge PDF','Extract pages','Images → PDF'],icon:FileStack},
  {title:'QR Studio',status:'Ready',description:'Create clean or styled QR codes with custom geometry, colors, logos and PNG/SVG export.',href:'/tools/qr-code',stack:['PNG / SVG','Custom styles','Logo'],icon:QrCode},
