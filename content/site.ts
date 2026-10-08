@@ -13,7 +13,7 @@ import {
 } from 'lucide-react'
 
 export const site = {
-  domain: 'lattelix.ru',
+  domain: 'lattelix.com',
   name: 'Lattelix',
   title: 'Lattelix — living web systems, interfaces and experiments',
   description:
@@ -310,9 +310,9 @@ export const musicPlan = {
     'Public share cards',
   ],
   privateArchitecture: [
-    'music.lattelix.ru runs Navidrome behind Cloudflare Tunnel',
+    'music.lattelix.com runs Navidrome behind Cloudflare Tunnel',
     'Cloudflare Access protects the web UI when used personally',
-    'lattelix.ru/music stays public and exposes only curated metadata',
+    'lattelix.com/music stays public and exposes only curated metadata',
     'Subsonic/mobile clients need a separate decision because Cloudflare Access can break client compatibility',
   ],
   releasePlan: [
