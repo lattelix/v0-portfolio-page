@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     'data interfaces',
     'personal infrastructure',
   ],
-  metadataBase: new URL('https://lattelix.ru'),
+  metadataBase: new URL(`https://${site.domain}`),
   referrer: 'origin-when-cross-origin',
   title: {
     default: site.title,
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
       },
     ],
     siteName: site.name,
-    url: 'https://lattelix.ru',
+    url: `https://${site.domain}`,
     type: 'website',
   },
   twitter: {
