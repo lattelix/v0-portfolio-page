@@ -5,7 +5,7 @@ const nextConfig = {
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'lattelix.ru' }],
-        destination: 'https://lattelix.com/:path*',
+        destination: 'https://lattelix.com/:path*?from=ru',
         permanent: true,
       },
     ]
