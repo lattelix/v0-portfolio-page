@@ -4,6 +4,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import { ThemeProvider } from '@/components/theme-provider'
 import { SiteHeader } from '@/components/site/site-header'
+import { LegacyDomainNotice } from '@/components/site/legacy-domain-notice'
 import { StructuredData } from '@/components/site/structured-data'
 import { site } from '@/content/site'
 import './globals.css'
@@ -71,6 +72,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <StructuredData />
           <SiteHeader />
+          <LegacyDomainNotice />
           {children}
         </ThemeProvider>
         <Analytics />
